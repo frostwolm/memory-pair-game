@@ -8,21 +8,45 @@
   display: flex;
   width: 450px;
   flex-wrap: wrap;
-  perspective: 1000px;
 }
 
-.flipper{
+.flip-container{
   width: 100px;
   height: 100px;
+  perspective: 1000px;
   border: solid black 2px;
   border-radius: 5px;
+}
+
+.flip-container:hover .flipper{
+		transform: rotateY(180deg);
+	}
+
+.flipper{
+  transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+.front, .back{
+  backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.front{
+  z-index: 2;
+	transform: rotateY(0deg);
+}
+
+.back{
+  transform: rotateY(180deg);
 }
 
 .card{
   width: 100%;
   height: auto;
-}
-
-.back{
-  visibility: hidden;
 }
