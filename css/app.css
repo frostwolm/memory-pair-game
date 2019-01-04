@@ -8,6 +8,7 @@
   display: flex;
   width: 450px;
   flex-wrap: wrap;
+  perspective: 1000px;
 }
 
 .flipper{
