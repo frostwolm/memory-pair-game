@@ -14,27 +14,27 @@
   width: 100px;
   height: 100px;
   perspective: 1000px;
-  border: solid black 2px;
-  border-radius: 5px;
+  padding: 5px;
 }
 
-.flip-container:hover .flipper{
+.flip-container.flip .flipper{
 		transform: rotateY(180deg);
 	}
 
 .flipper{
+  width: 100px;
+  height: 100px;
   transition: 0.6s;
 	transform-style: preserve-3d;
-
 	position: relative;
 }
 
 .front, .back{
   backface-visibility: hidden;
-
 	position: absolute;
 	top: 0;
 	left: 0;
+  opacity: inherit;
 }
 
 .front{
@@ -48,5 +48,13 @@
 
 .card{
   width: 100%;
-  height: auto;
+  height: 100%;
+  border: solid black 2px;
+  border-radius: 5px;
+  opacity: inherit;
+}
+
+.hidden{
+  transition: 0.5s;
+  visibility: hidden;
 }
