@@ -1,3 +1,5 @@
+const FLIP_DURATION = 600;
+
 let clickedCards = [];
 let cardsNum = 12;
 let imgIDsArray = [];
@@ -8,7 +10,12 @@ init();
 function init(){
     let gameContainer = document.querySelector('.game-container');
     let fragment = document.createDocumentFragment();
+    
+    //reset
     gameContainer.innerHTML = '';
+    cardsNum = 12;
+    gameContainer.removeEventListener('click', onCardClickHandler);
+
     for (var i = 0; i < cardsNum; i = i + 2) {
       imgIDsArray[i] = i + 1;
       imgIDsArray[i + 1] = i + 1;
@@ -40,12 +47,14 @@ function init(){
       fragment.appendChild(flipContainer);
     });
     gameContainer.appendChild(fragment);
-    gameContainer.addEventListener('click', evt => {
-      if (evt.target.classList.contains('card')) {
-        clickCard(evt.target);
-      }
-    });
+    gameContainer.addEventListener('click', onCardClickHandler);
 }
+
+function onCardClickHandler(evt){
+  if (evt.target.classList.contains('card')) {
+    clickCard(evt.target);
+  }
+};
 
 function clickCard(cardElement){
   if (_checkNow) {
@@ -71,9 +80,9 @@ function compareCards() {
     });
     cardsNum = cardsNum - 2;
   }else{
-    clickedCards.forEach(cardElem => {
+    setTimeout(clickedCards.forEach(cardElem => {
       flip(cardElem);
-    });
+    }), FLIP_DURATION + 100);
   }
   clickedCards = [];
   _checkNow = false;
