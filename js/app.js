@@ -3,7 +3,7 @@ let cardsNum = 12;
 let imgIDsArray = [];
 let _checkNow = false;
 
-init(cardsNum);
+init();
 
 function init(){
     document.querySelector('.game-container').innerHTML = '';
