@@ -6,8 +6,9 @@ let _checkNow = false;
 init();
 
 function init(){
-    document.querySelector('.game-container').innerHTML = '';
+    let gameContainer = document.querySelector('.game-container');
     let fragment = document.createDocumentFragment();
+    gameContainer.innerHTML = '';
     for (var i = 0; i < cardsNum; i = i + 2) {
       imgIDsArray[i] = i + 1;
       imgIDsArray[i + 1] = i + 1;
@@ -37,8 +38,8 @@ function init(){
       flipContainer.appendChild(flipper);
       fragment.appendChild(flipContainer);
     });
-    document.querySelector('.game-container').appendChild(fragment);
-    document.querySelector('.game-container').addEventListener('click', evt => {
+    gameContainer.appendChild(fragment);
+    gameContainer.addEventListener('click', evt => {
       if (evt.target.classList.contains('card')) {
         clickCard(evt.target);
       }
