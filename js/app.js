@@ -17,14 +17,15 @@ function init(){
     imgIDsArray.forEach(imgNum => {
       let flipContainer = document.createElement('div');
       flipContainer.classList.add('flip-container');
-      flipContainer.dataset.imgid = imgNum;
+      //flipContainer.dataset.imgid = imgNum;
       let flipper = document.createElement('div');
       flipper.classList.add('flipper');
       let front = document.createElement('div');
       front.classList.add('front');
       let frontImg = document.createElement('img');
       frontImg.classList.add('card');
-      frontImg.setAttribute('src', 'img/card-back.png')
+      frontImg.setAttribute('src', 'img/card-back.png');
+      frontImg.dataset.imgid = imgNum;
       let back = document.createElement('div');
       back.classList.add('back');
       let backImg = document.createElement('img');
@@ -63,8 +64,8 @@ function clickCard(cardElement){
 }
 
 function compareCards() {
-  if (clickedCards[0].parentNode.parentNode.parentNode.dataset.imgid ==
-      clickedCards[1].parentNode.parentNode.parentNode.dataset.imgid) {
+  if (clickedCards[0].dataset.imgid ==
+      clickedCards[1].dataset.imgid) {
     clickedCards.forEach(cardElem => {
       hide(cardElem);
     });
@@ -87,9 +88,20 @@ function checkWin(){
 }
 
 function flip(cardElement){
-  cardElement.parentNode.parentNode.parentNode.classList.toggle('flip');
+  searchParentByClass(cardElement, 'flip-container').classList.toggle('flip');
 }
 
 function hide(cardElement){
-  cardElement.parentNode.parentNode.classList.add('hidden');
+  searchParentByClass(cardElement, 'flipper').classList.add('hidden');
+}
+
+function searchParentByClass(elem, className){
+  if (elem.parentNode === document.documentElement) {
+    return null;
+  }
+  if (elem.parentNode.classList.contains(className)) {
+    return elem.parentNode;
+  } else {
+    return searchParentByClass(elem.parentNode, className);
+  }
 }
